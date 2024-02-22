@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>  
+
+    <style>
+        table{
+            margin: auto;
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+        tr,td{
+            border:solid 1px black;
+        }
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+        #purple{
+            color:purple;
+        }
+    
+    </style> <!--꾸미고자하는 element 찾기-->
+    <script>
+        function test(){ // CALL 버튼 클릭 시 실행됨
+           // alert('hello');
+            console.log('welcome');
+            let ele = document.getElementById('position'); // id가 POSITION 인 요소를 찾아줘 
+            ele.innerHTML="Welcome Javascript!";
+        }
+        //test();
+        function now(){
+            let date = new Date();
+            let hour = date.getHours();
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+            let time = `${hour}:${min}:${sec}`;
+            
+            let ele = document.getElementById('position'); // id가 POSITION 인 요소를 찾아줘 
+            ele.innerHTML= time;
+        }
+        function example(){
+            setTimeout(() => {
+                alert("Hello callback");
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <div id="position"></div>
+    <table>
+        <tr>
+            <td class="red">일</td> <!--특정 행에 변화를 주고 싶을 때, 요소 자체에 이름을 매겨서 구분하기-->
+            <td>월</td>
+            <td>화</td>
+            <td>수</td>
+            <td>목</td>
+            <td id="purple">금</td>
+            <td class="blue">토</td>
+        </tr>
+    </table>
+    <input type="button" value="call" onclick="test()">
+    <input type="button" value="current time" onclick="now()">
+    <input type="button" value="callback" onclick="example()"> <!--callback은 보통 비동기-->
+</body>
+</html>

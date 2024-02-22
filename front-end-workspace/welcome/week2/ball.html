@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lotto</title>
+</head>
+<style>
+    img{
+        width: 300px;
+        height:300px;
+    }
+</style>
+<script>
+    function display(){
+        let ele = document.getElementById("content");
+        for(let i =0; i<6; i++){
+            ele.innerHTML = '<img src=\"images/1.png\">';
+        }
+        //ele.innerHTML = '<img src=\"images/1.png\">';
+
+    }
+    function sort(dp){
+        let ele = document.getElementById("cotent");
+        setTimeout(()=>{
+            
+        }, 3000); 
+    }
+    function sort_ball(){
+        return new Promise(function(resolve, reject){
+            setTimeout(()=>{
+                ele.innerHTML = '<img src=\"images/1.png\">';
+            }, 3000);
+        });
+    }
+    async function sorted(){
+        let result = await sort_ball();
+        alert(result);
+    }
+</script>
+<body>
+    <div id = "content">
+    <img src="images/0.png" alt ="공백" id="ball0">
+    <img src="images/0.png" alt ="공백" id="ball0">
+    <img src="images/0.png" alt ="공백" id="ball0">
+    <img src="images/0.png" alt ="공백" id="ball0">
+    <img src="images/0.png" alt ="공백" id="ball0">
+    <img src="images/0.png" alt ="공백" id="ball0">
+    <input type="button" value="정렬" onclick="display()"/>
+    <input type="button" value="테스트" onclick="sort_ball()"/>
+    <input type="button" value="정렬" onclick="sort()"/>
+</div>
+    <!-- 
+    <img src="images/1.png" id="ball1">
+    <img src="images/5.png" id="ball5">
+    <img src="images/6.png" id="ball6">
+    <img src="images/8.png" id="ball8">
+    <img src="images/11.png" id="ball11">
+    <img src="images/12.png" id="ball12">
+ -->
+
+</body>
+</html>

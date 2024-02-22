@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            margin: 0px auto;
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+        tr, td {
+            border : solid 1px black;
+        }
+    </style>
+    <script>
+        function viewCalendar(){
+            // 사용자로부터 입력받은 년월 정보 읽어와서 값 설정
+            let year = document.getElementById('Year').value;
+            let mon = document.getElementById('Month').value;
+
+
+            let cal = new Date(year,mon-1,1);
+            let date = cal.getDay();
+            console.log(date);
+            
+            cal = new Date(year,mon,0); 
+            let day = cal.getDate();
+            console.log(day);
+            let space = date;
+            let lastDay = day;
+
+            let month = makeCalendar(space,lastDay);
+            let ele = document.getElementById('cal');
+            ele.innerHTML = month;
+        }
+        function makeCalendar(_space, _lastDay) {
+            let calendar = "";
+            let space = _space;//4;
+            let lastDay = _lastDay;//29;
+            let moreSpace = 7 - ((space + lastDay) % 7);
+            calendar += `<table><tr><td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td></tr>`;
+            calendar += '<tr>';
+            for (let k = 0; k < space; k++) {
+                calendar += `<td></td>`;
+            }
+            for (let i = 0; i < lastDay; i++) {
+                calendar += `<td>${i + 1}</td>`;
+                if ((i + 1 + space) % 7 == 0) {
+                    calendar += '</tr><tr>';
+                }
+            }
+            for (let i = 0; i < moreSpace; i++) {
+                calendar += `<td></td>`;
+            }
+            calendar += "</tr></table>";
+            return calendar;
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" value ="2024" id="Year">
+    <input type="text" value ="2" id="Month">
+    <input type="button" value="viewCalendar" onclick="viewCalendar()">
+    <div id="cal"></div>
+</body>
+
+</html>

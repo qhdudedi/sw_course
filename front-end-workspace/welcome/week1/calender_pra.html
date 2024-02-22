@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function viewMonth9(){
+            let ele = document.getElementById('cal');
+            ele.innerHTML = "9월";
+        }
+        function makeCalendar(_space,_lastDay){
+            let calendar = "";
+            let space = _space;
+            let lastDay = _lastDay;
+            calendar += `<table><tr><td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>`;
+            calendar += '<tr>';
+            for(let k = 0; k<space; k++){
+                calendar += `<td></td>`;
+            }
+            for(let i=0; i<lastDay;i++){
+                calendar += '<td>${i+1}</td>';
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="cal">Calendar</div>
+    <input type="button" value="1월" onclick="viewMonth1()">
+    <input type="button" value="5월" onclick="viewMonth5()">
+    <input type="button" value="9월" onclick="viewMonth9()">
+</body>
+</html>

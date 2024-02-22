@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            margin: 0px auto;
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+        tr, td {
+            border : solid 1px black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(document).ready(function(){
+                alert('Ready!!!');
+                $('#btn_check_id').on('click',function(e){
+                    alert('click');
+                    //let ele = document.getElementById('user_id');
+                    let ele = $('#user_id')
+                    let userId = ele.val();
+                    alert(userId);
+                    console.log(userId);
+                    let len = userId.length;
+                    let firstChar = userId.charAt(0);
+                    let alpha = "abcdefghijklmnopqrstuvwxyz";
+                    let idx = alpha.indexOf(firstChar);
+                    console.log(len,firstChar,idx);
+                    e.preventDefault();
+                });
+
+                $('#pwd2').on('blur',()=>{
+                    let p1 = $('#pwd1').val();
+                    let p2 = $('#pwd2').val();
+                    if(p1==p2){
+                        alert('same password');
+                    } else {
+                        alert("not same");
+                        $('#pwd2').val("");
+                        $('#pwd1').focus();
+                    }
+                });
+                    
+                $("#checkbox").on('click',function(){
+                    alert('in');
+                    let count = 0;
+                    $('.interests').each((item,index) => {
+                        if(index.checked){
+                            console.log(item);
+                            count++;
+                        };
+                    });
+                    console.log(count);
+                })
+        });
+    </script>
+    <script>
+        function checkId(){
+            alert('abc');
+            let ele = document.getElementById('user_id');
+            let userId = ele.value;
+            alert(userId);
+            console.log(userId);
+            return false;
+        }
+        function checkCount(){
+            //alert('check');
+            let eles = document.getElementsByName('interests');
+            alert(eles.length);
+            let count = 0;
+            for(let i=0;i<eles.length;i++){
+                if(eles[i].checked){
+                    console.log(eles[i].value);
+                    count = count + 1;
+                    //count += 1;
+                    //count++;
+                }
+            }
+            console.log(count);
+        }
+    </script>
+</head>
+<body>
+    <form action="" method="">
+        <table>
+            <tr><th colspan="5" id="form">회원가입양식</th></tr>
+            <tr><td>구분</td><td class="data_ui" colspan="2">데이터입력</td><td>유효성검사</td><td>비고</td></tr>
+            <tr>
+                <td>아이디</td>
+                <td colspan="2">
+                    <input type="text" id="user_id" name="userId">
+                    <button id="btn_check_id">아이디확인</button>
+                </td>
+                <td>8자리 , 첫글자 영문소문자</td><td id="message"></td></tr>
+            <tr><td>비밀번호</td><td colspan="2"><input type="text" id="pwd1" name="pwd1"></td><td rowspan="2">비밀번호 일치</td><td><input type="hidden" id="flag" value="false"></td></tr>
+            <tr><td>비번확인</td><td colspan="2"><input type="text" id="pwd2"></td><td></td></tr>
+            <tr>
+                <td>성별</td>
+                <td colspan="2">
+                    <input type="radio" name="gender">남
+                    <input type="radio" name="gender">여
+                </td><td>필수 선택</td><td></td></tr>
+            <tr>
+                <td>관심분야</td>
+                <td colspan="2">
+                    <input type="checkbox" name="interests" value="0" class="interests">문학
+                    <input type="checkbox" name="interests" value="1" class="interests">어학
+                    <input type="checkbox" name="interests" value="2" class="interests">정보IT<br>
+                    <input type="checkbox" name="interests" value="3" class="interests">과학
+                    <input type="checkbox" name="interests" value="4" class="interests">수학
+                    <input type="checkbox" name="interests" value="5" class="interests">예술
+                </td><td>2~3개 사이 선택</td>
+                <td><input type="button" value="checkbox" id="checkbox"></td>
+            </tr>
+            <tr><td>자기소개</td><td colspan="2"><textarea cols="50" rows="5"></textarea></td><td></td><td></td></tr>    
+            <tr><td colspan="5" id="sending"><input type="submit" value="가입"> <input type="reset"></td></tr>
+        </table>
+    </form>
+</body>
+</html>

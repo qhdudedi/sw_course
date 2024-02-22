@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script> // 버튼 클릭 시 이미지 출력
+    function func1(){ 
+        let canvas = document.getElementById("content");
+        let img = new Image();
+        img.src = 'img/pink.jpg';
+	    img.onload = function () {
+		    canvas.drawImage(img, 10, 10, 200, 200);
+	    }
+	    
+    }
+    function func2(){ // InnerHTML를 이용해서 이미지 출력 -짝꿍님
+        let ele = document.getElementById("content");
+        //ele.innerHTML = "<img src=\"img/blue.jpg\">";
+        ele.innerHTML = '<img src=\"img/blue.jpg\" width=300px height=200px>';
+        
+    }
+    function func3(){ // setAttribute - 강사님
+        let ele = document.getElementById("img2");
+        ele.setAttribute('src','img/green.jpg')
+    }
+</script>
+<body>
+    <div id = "content"></div>
+        <input type="button" value="button1" onclick="func1()"/>
+        <input type="button" value="button2" onclick="func2()"/>
+        <input type="button" value="button3" onclick="func3()"/>
+    <img src="" alt ="test2" id="img2"> <!-- alt ="test" 텍스트 속성 값(이미지를 위한 대체 텍스트)-->
+</body>
+</html>
+<!--  이미지
+    <img src ="이미지명" width = "100px" height="100px">
+-->

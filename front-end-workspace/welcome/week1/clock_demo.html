@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let startClock;
+        function startTime(){
+            let timer = document.getElementById('timer');
+            // let now = new Date();
+            // timer.innerHTML=now.toLocaleTimeString();
+            startClock = setInterval(()=>
+            {
+                let now = new Date();
+                timer.innerHTML = now.toLocaleTimeString();
+            },1000);
+        }
+        function stopTime(){
+            //alert('timestop');
+            clearInterval(startClock);                     
+        }
+    </script>
+</head>
+<body>
+    <div id="timer">Timer</div>
+    <input type="button" value="time_start" onclick="startTime()">
+    <input type="button" value="time_stop" onclick="stopTime()">
+</body>
+</html>

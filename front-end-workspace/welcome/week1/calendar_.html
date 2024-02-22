@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            margin: 0px auto;
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+        tr, td {
+            border : solid 1px black;
+        }
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+        #purple {
+            color: purple;
+        }
+    </style>
+    <script>
+        function viewMonth(month){
+            alert('select '+month);
+            if(month==1){
+                viewMonth9(1,31);
+            } else if(month==5){
+                viewMonth9(3,31);
+            } else if(month==9){
+                viewMonth9(0,31);
+            }
+        }
+        function viewMonth5(s,l){
+            viewMonth9(s,l);
+        }
+        function viewMonth1(s,l){
+            viewMonth9(s,l);
+        }
+        function viewMonth9(s,l){
+            let ele = document.getElementById('cal');
+            ele.innerHTML = this.makeCalendar(s,l);
+        }
+        function makeCalendar(_space,_lastDay){
+            let calendar = "";
+            let space = _space;//4;
+            let lastDay = _lastDay;//29;
+            let moreSpace = 7-((space+lastDay)%7);
+            calendar += `<table><tr><td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td></tr>`; 
+            calendar += '<tr>';
+            for(let k=0;k<space;k++){
+                calendar += `<td></td>`;
+            }
+            for(let i=0;i<lastDay;i++){
+                calendar += `<td>${i+1}</td>`;
+                if((i+1+space)%7==0){
+                    calendar += '</tr><tr>';
+                }
+            }
+            for(let i=0;i<moreSpace;i++){
+                calendar += `<td></td>`;
+            }
+            calendar += "</tr></table>";
+            console.log(calendar);
+            return calendar;
+        }
+    </script>
+</head>
+<body>
+   
+    <input type="button" value="1월" onclick="viewMonth1(1,31)">
+    <input type="button" value="5월" onclick="viewMonth5(3,31)">
+    <input type="button" value="9월" onclick="viewMonth9(0,31)">
+    <div id="cal">Calendar</div>
+    <select onchange="viewMonth(this.value)">
+        <option>--월 선택--</option>
+        <option value="1">1월</option>
+        <option value="5">5월</option>
+        <option value="9">9월</option>
+    </select>
+</body>
+</html>

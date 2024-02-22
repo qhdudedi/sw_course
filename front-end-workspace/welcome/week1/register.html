@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            margin: 0px auto;
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+        tr, td{
+            border: solid 1px black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            //alert('Ready!!!');
+            $('#btn_check_id').on('click',function(event){
+                alert('click');
+                event.preventDefault();
+            })
+        });
+    </script>
+    <script>
+        function checkId() {
+            let eleId = document.getElementById("id");
+            let userId = eleId.value;
+            return false;
+        }
+        function checkId2() {
+            let id = document.getElementById("id");
+            idReg = /^[a-zA-Z][0-9a-zA-Z]{8,16}$/g;
+            if(!idReg.test(id)){
+                alert("영소문자로 시작하거나 8자리 이상이어야합니다.")
+            }
+            // if (form.id.value.length != 8 ) {
+            //     alert("8자리로 입력하세요.");
+            // }
+        }
+        function checkPwd() {
+            if (pwd != checkPwd) {
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+        }
+        // function checkBox() {
+        //     flag = false;
+        //     for(let i = 0; i < checkform.field.length; i++) {
+        //         if(checkform.field[i].checked) {
+        //             str += checkform.field[i].value + "\n";
+        //             flag = true;
+        //         }
+        //         if(str > 4 && str <= 1) {
+        //                 alert("2-3개 선택하세요");
+        //                 return false;
+        //             }
+        //     }
+        //     if(flag == false) {
+        //         alert("관심 분야를 선택하세요.");
+        //         return false;
+        //     }
+        //     alert("통과되었습니다.");
+        // }
+        function checkCount(){
+            let ele = document.getElementsByName('field');
+            let count =0;
+            for(let i=0; i<ele.length; i++){
+                if(ele[i].checked){
+                    count++;
+                }
+            }
+            console.log(count);
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <table border="1">
+        <tr>
+            <td colspan="4" align="center" height="50">회원가입양식</td>
+        </tr>
+        <tr align="center" height="50">
+            <td width="150">구분</td>
+            <td width="300">데이터입력</td>
+            <td width="150">유효성검사</td>
+            <td width="150">비고</td>
+        </tr>
+        <form name="form" action="form">
+            <tr height="100">
+                <td>아이디</td>
+                <td>
+                    <input id="id" type="text" name="id">
+                    <button id="btn_check_id" type="submit" onclick="checkId()">아이디확인</button>
+                </td>
+                <td>8자리, 첫글자<br>영문소문자</td>
+                <td></td>
+            </tr>
+        </form>
+        <tr height="50">
+            <td>비밀번호</td>
+            <td><input id="pwd" type="password" name="pwd"></td>
+            <td rowspan="2">비밀번호 일치</td>
+            <td rowspan="2"></td>
+        </tr>
+        <tr height="50">
+            <td>비번확인</td>
+            <td><input id="pwd_ch" type="password" name="checkpwd"></td>
+        </tr>
+        <tr height="50">
+            <td>성별</td>
+            <td>
+                <input type="radio" name="성별" value="남" />남
+                <input type="radio" name="성별" value="여" />여
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+       <!-- <form name="checkform" action="checkform"> -->
+            <tr height="50">
+                <td>관심분야</td>
+                <td>
+                    <input type="checkbox" name="field" value="문학" />문학
+                    <input type="checkbox" name="field" value="어학" />어학
+                    <input type="checkbox" name="field" value="정보IT" />정보IT
+                    <br>
+                    <input type="checkbox" name="field" value="과학" />과학
+                    <input type="checkbox" name="field" value="수학" />수학
+                    <input type="checkbox" name="field" value="예술" />예술
+                    <button type="submit" onclick="checkCount()">검사</button>
+                </td>
+                <td>2~3개 사이 선택</td>
+                <td></td>
+            </tr>
+      <!--</form>-->  
+              <tr height="100">
+            <td>자기소개</td>
+            <td> <textarea name="self" cols="35" rows="5">
+                </textarea>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center" height="50">
+                <button type="submit" onclick="checkPwd()">가입</button>
+                <button type="reset">초기화</button>
+            </td>
+        </tr>
+    </table>
+    </form>
+
+</body>
+
+</html>
