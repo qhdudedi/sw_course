@@ -14,12 +14,14 @@ public class JDBCMain {
         GisaDAO dao = new GisaDAO();
 
         try {
-            boolean flag = dao.insert(sql);
+            //boolean flag = dao.insert(sql);
+            sql = "delete from gisa where studentId = 88000;";
+            boolean flag = dao.delete(sql);
             if(flag)
             {
-                System.out.println("insert success");
+                System.out.println("delete success");
             } else{
-                System.out.println("insert fail");
+                System.out.println("delete fail");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -20,5 +20,20 @@ public class GisaDAO {
         }
         return flag;
     }
+    //delete 구현
+    public boolean delete(String sql) throws SQLException {
+        boolean flag = false;
+
+        Connection con = ConnectionManager.getConnection();
+        Statement stmt = con.createStatement();
+        int affectedCount = stmt.executeUpdate(sql);
+
+        ConnectionManager.closeConnection(null,stmt,con);
+
+        if(affectedCount > 0 ){
+            flag = true;
+        }
+        return flag;
+    }
 
 }
