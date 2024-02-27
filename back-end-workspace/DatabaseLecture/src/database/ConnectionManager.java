@@ -21,19 +21,6 @@ public class ConnectionManager {
         return con;
     }
     public static void closeConnection(ResultSet rs, Statement stmt, Connection con){
-        if(rs != null){
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        if(stmt != null){
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
+
     }
 }
