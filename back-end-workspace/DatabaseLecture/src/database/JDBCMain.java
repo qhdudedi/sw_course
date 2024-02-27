@@ -15,13 +15,15 @@ public class JDBCMain {
 
         try {
             //boolean flag = dao.insert(sql);
-            sql = "delete from gisa where studentId = 88000;";
-            boolean flag = dao.delete(sql);
+            //sql = "delete from gisa where studentId = 88000;";
+            //boolean flag = dao.delete(sql);
+            Student student = new Student(88000,"addx",17,29,16,49,43,154,"C","A","C");
+            boolean flag = dao.insert(student);
             if(flag)
             {
-                System.out.println("delete success");
+                System.out.println("insert success");
             } else{
-                System.out.println("delete fail");
+                System.out.println("insert fail");
             }
         } catch (SQLException e) {
             e.printStackTrace();
