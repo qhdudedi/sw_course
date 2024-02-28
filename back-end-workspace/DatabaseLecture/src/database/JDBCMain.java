@@ -7,7 +7,7 @@ public class JDBCMain {
 
     public static void main(String[] args){
         JDBCMain main = new JDBCMain();
-        main.makeData();
+        main.testCRUD();
     }
     private ArrayList<Student> makeData() {
         ArrayList<Student> list = null;
@@ -16,7 +16,6 @@ public class JDBCMain {
         String sql = "select * from gisa;";
 
         list = dao.select(sql);
-        System.out.println(list);
         return list;
 
     }

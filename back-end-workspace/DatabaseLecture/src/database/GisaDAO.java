@@ -4,6 +4,49 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class GisaDAO {
+
+    //Transaction 관리
+    public boolean insert(ArrayList<Student> list) throws SQLException {
+        boolean flag = false;
+
+        Connection con = ConnectionManager.getConnection();
+        String sql = "insert into gisa values (?,?,?,?,?,?,?,?,?,?,?)";
+        int affectedCount = 0;
+        PreparedStatement pstmt = null;
+
+        try {
+            for (Student student : list) {
+                con.setAutoCommit(false);
+                pstmt = con.prepareStatement(sql);
+
+                pstmt.setInt(1, student.getStdNo());
+                pstmt.setString(2, student.getEmail());
+                pstmt.setInt(3, student.getKor());
+                pstmt.setInt(4, student.getEng());
+                pstmt.setInt(5, student.getMath());
+                pstmt.setInt(6, student.getSci());
+                pstmt.setInt(7, student.getHist());
+                pstmt.setInt(8, student.getTotal());
+                pstmt.setString(9, student.getMgrCode());
+                pstmt.setString(10, student.getAccCode());
+                pstmt.setString(11, student.getLocCode());
+                affectedCount += pstmt.executeUpdate();
+            }
+            if (affectedCount > 0) {
+                System.out.println(affectedCount);
+                flag = true;
+            }
+            con.commit();
+        } catch (SQLException se) {
+            con.rollback();
+        } finally {
+            con.setAutoCommit(true);
+        }
+        ConnectionManager.closeConnection(null, pstmt, con);
+        return flag;
+    }
+
+
     // SQL에서 받아오기
     public ArrayList<Student> select(String sql) {
 
@@ -14,7 +57,7 @@ public class GisaDAO {
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             Student student = null;
-            while(rs.next()){
+            while (rs.next()) {
                 // 하나의 레코드를 student객체 1개에 맵핑하고 리스트에 저장
                 int stdNo = rs.getInt(1);
                 String email = rs.getString(2);
@@ -27,7 +70,7 @@ public class GisaDAO {
                 String mgrCode = rs.getString(9);
                 String accCode = rs.getString(10);
                 String LocCode = rs.getString(11);
-                student = new Student(stdNo,email,kor,eng,math,sci,hist,sci,mgrCode,accCode,LocCode);
+                student = new Student(stdNo, email, kor, eng, math, sci, hist, sci, mgrCode, accCode, LocCode);
 
                 list.add(student);
             }
@@ -39,7 +82,7 @@ public class GisaDAO {
     }
 
     //1000개의 data insert
-    public boolean insert(ArrayList<Student> list) throws SQLException{
+    public boolean insertOld(ArrayList<Student> list) throws SQLException {
         boolean flag = false;
         Connection con = ConnectionManager.getConnection();
 
@@ -48,7 +91,7 @@ public class GisaDAO {
         PreparedStatement pstmt = con.prepareStatement(sql);
         int affectedCount = 0;
 
-        for(Student student : list) {
+        for (Student student : list) {
             pstmt.setInt(1, student.getStdNo());
             pstmt.setString(2, student.getEmail());
             pstmt.setInt(3, student.getKor());
@@ -62,11 +105,11 @@ public class GisaDAO {
             pstmt.setString(11, student.getLocCode());
             affectedCount += pstmt.executeUpdate();
         }
-        if(affectedCount > 0){
+        if (affectedCount > 0) {
             System.out.println(affectedCount);
             flag = true;
         }
-        ConnectionManager.closeConnection(null,pstmt,con);
+        ConnectionManager.closeConnection(null, pstmt, con);
         return flag;
     }
 
@@ -90,10 +133,10 @@ public class GisaDAO {
         pstmt.setString(11, student.getLocCode());
 
         int affectedCount = pstmt.executeUpdate();
-        if(affectedCount > 0){
+        if (affectedCount > 0) {
             flag = true;
         }
-        ConnectionManager.closeConnection(null,pstmt,con);
+        ConnectionManager.closeConnection(null, pstmt, con);
         return flag;
     }
 
@@ -105,13 +148,14 @@ public class GisaDAO {
         Statement stmt = con.createStatement();
         int affectedCount = stmt.executeUpdate(sql);
 
-        ConnectionManager.closeConnection(null,stmt,con);
+        ConnectionManager.closeConnection(null, stmt, con);
 
-        if(affectedCount > 0 ){
+        if (affectedCount > 0) {
             flag = true;
         }
         return flag;
     }
+
     //delete 구현
     public boolean delete(String sql) throws SQLException {
         boolean flag = false;
@@ -120,9 +164,9 @@ public class GisaDAO {
         Statement stmt = con.createStatement();
         int affectedCount = stmt.executeUpdate(sql);
 
-        ConnectionManager.closeConnection(null,stmt,con);
+        ConnectionManager.closeConnection(null, stmt, con);
 
-        if(affectedCount > 0 ){
+        if (affectedCount > 0) {
             flag = true;
         }
         return flag;
