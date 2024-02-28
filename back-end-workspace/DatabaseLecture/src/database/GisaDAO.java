@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GisaDAO {
 
-    //Transaction 관리
+    //Batch 실습
     public boolean insert(ArrayList<Student> list) throws SQLException {
         boolean flag = false;
 
@@ -16,6 +16,7 @@ public class GisaDAO {
 
         try {
             for (Student student : list) {
+                int count = 0;
                 con.setAutoCommit(false);
                 pstmt = con.prepareStatement(sql);
 
@@ -30,7 +31,15 @@ public class GisaDAO {
                 pstmt.setString(9, student.getMgrCode());
                 pstmt.setString(10, student.getAccCode());
                 pstmt.setString(11, student.getLocCode());
-                affectedCount += pstmt.executeUpdate();
+
+                pstmt.addBatch();                                // 모아서 보내기
+                count++;
+                if (count % 100 == 0) {                          // 보내는 기준 = 100
+                    int[] temp = pstmt.executeBatch();           // 모은 개수 전송
+                    affectedCount += temp.length;
+                    System.out.println("batch execute");
+                }
+
             }
             if (affectedCount > 0) {
                 System.out.println(affectedCount);
