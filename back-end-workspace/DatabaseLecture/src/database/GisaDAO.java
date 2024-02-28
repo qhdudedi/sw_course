@@ -4,6 +4,39 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class GisaDAO {
+    // SQL에서 받아오기
+    public ArrayList<Student> select(String sql) {
+
+        ArrayList<Student> list = new ArrayList<Student>();
+        Connection con = ConnectionManager.getConnection();
+
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            Student student = null;
+            while(rs.next()){
+                // 하나의 레코드를 student객체 1개에 맵핑하고 리스트에 저장
+                int stdNo = rs.getInt(1);
+                String email = rs.getString(2);
+                int kor = rs.getInt(3);
+                int eng = rs.getInt(4);
+                int math = rs.getInt(5);
+                int sci = rs.getInt(6);
+                int hist = rs.getInt(7);
+                int total = rs.getInt(8);
+                String mgrCode = rs.getString(9);
+                String accCode = rs.getString(10);
+                String LocCode = rs.getString(11);
+                student = new Student(stdNo,email,kor,eng,math,sci,hist,sci,mgrCode,accCode,LocCode);
+
+                list.add(student);
+            }
+            ConnectionManager.closeConnection(rs, pstmt, con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     //1000개의 data insert
     public boolean insert(ArrayList<Student> list) throws SQLException{

@@ -7,7 +7,18 @@ public class JDBCMain {
 
     public static void main(String[] args){
         JDBCMain main = new JDBCMain();
-        main.testCRUD();
+        main.makeData();
+    }
+    private ArrayList<Student> makeData() {
+        ArrayList<Student> list = null;
+        GisaDAO dao = new GisaDAO();
+
+        String sql = "select * from gisa;";
+
+        list = dao.select(sql);
+        System.out.println(list);
+        return list;
+
     }
     public void testCRUD(){
         String sql = "insert into gisa values (77000,'addx',17,29,16,49,43,154,'C','A','C');";
@@ -30,7 +41,8 @@ public class JDBCMain {
             e.printStackTrace();
         }
     }
-    private ArrayList<Student> makeData(){
+
+    private ArrayList<Student> makeDataFromfile(){
         ArrayList<Student> list = null;
 
         // 파일에 접속하여 생성

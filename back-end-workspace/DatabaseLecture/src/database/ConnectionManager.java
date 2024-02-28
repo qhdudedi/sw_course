@@ -21,6 +21,20 @@ public class ConnectionManager {
         return con;
     }
     public static void closeConnection(ResultSet rs, Statement stmt, Connection con){
+        if(rs != null){
+            try{
+                stmt.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        if(con != null){
+            try{
+                con.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
 
     }
 }
