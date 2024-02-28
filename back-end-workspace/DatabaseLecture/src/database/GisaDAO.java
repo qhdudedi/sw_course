@@ -15,11 +15,10 @@ public class GisaDAO {
         PreparedStatement pstmt = null;
 
         try {
+            int count = 0;
+            con.setAutoCommit(false);
+            pstmt = con.prepareStatement(sql);
             for (Student student : list) {
-                int count = 0;
-                con.setAutoCommit(false);
-                pstmt = con.prepareStatement(sql);
-
                 pstmt.setInt(1, student.getStdNo());
                 pstmt.setString(2, student.getEmail());
                 pstmt.setInt(3, student.getKor());
