@@ -3,9 +3,6 @@ package sku.lesson.springboot.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sku.lesson.springboot.utils.DateService;
 import sku.lesson.springboot.dto.MemberDTO;
 import sku.lesson.springboot.service.MemberService3;
-import sku.lesson.springboot.utils.DateService;
 
 @Controller
 @RequestMapping(value = "/member3")
@@ -26,20 +23,20 @@ public class MemberController3 {
 
 	@Autowired
 	private MemberService3 ms;
-	
+
 	@RequestMapping(value = "/ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public String checkId(@RequestParam("userId") String id) {
 		boolean check = ms.checkId(id);
 		return "{\"result\":"+check+"}";
 	}
-	
+
 	@RequestMapping(value = "/registView", method = RequestMethod.GET)
 	public String registView(Model model) {
 		model.addAttribute("registDate",DateService.getDateTime(1));
 		return "./member3/regist";
 	}
-	
+
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String regist(@ModelAttribute MemberDTO dto, BindingResult br) {
 		if(br.hasErrors()) {
@@ -51,7 +48,7 @@ public class MemberController3 {
 		boolean flag = ms.registMember(dto);
 		return "redirect:list";
 	}
-	
+
 	@RequestMapping(value = "/list", method = {RequestMethod.GET,RequestMethod.POST})
 	public String list(Model model) {
 		ArrayList<MemberDTO> list = ms.getMemberData();
@@ -59,7 +56,7 @@ public class MemberController3 {
 		System.out.println(" list3 >> "+list.size());
 		return "./member3/list";
 	}
-	
+
 	//search
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(@RequestParam("userId") String id, Model model) {
@@ -79,7 +76,7 @@ public class MemberController3 {
 	//update
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@ModelAttribute MemberDTO dto) {
-		
+
 		//서비츠 요청
 		ms.modifyMember(dto);
 

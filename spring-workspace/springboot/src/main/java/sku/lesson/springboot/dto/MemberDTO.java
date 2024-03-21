@@ -7,7 +7,7 @@ public class MemberDTO {
 	private String userName;
 	private String userPwd;
 	private Timestamp registDate;
-	
+
 	public MemberDTO() {}
 	public MemberDTO(String userId, String userName, String userPwd, Timestamp registDate) {
 		super();
@@ -16,7 +16,7 @@ public class MemberDTO {
 		this.userPwd = userPwd;
 		this.registDate = registDate;
 	}
-	
+
 	public String getUserId() {
 		return userId;
 	}
@@ -46,7 +46,4 @@ public class MemberDTO {
 		return "MemberDTO [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", registDate="
 				+ registDate + "]";
 	}
-	
-	
-	
 }

@@ -10,10 +10,10 @@ import sku.lesson.springboot.dto.MemberDTO;
 
 @Service
 public class MemberService3 {
-	
+
 	@Autowired
 	private MemberDAO3 dao;
-	
+
 	public boolean checkId(String id) {
 		boolean flag = false;
 		flag = dao.selectById(id);
