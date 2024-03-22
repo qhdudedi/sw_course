@@ -13,15 +13,16 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", updatable = false)
+    @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name="title", updatable = false)
+    @Column(name = "title", nullable = false)
     private String title;
-    @Column(name="content", updatable = false)
+
+    @Column(name = "content", nullable = false)
     private String content;
     @Builder
-    private Article(String title, String content){
+    public Article(String title, String content){
         this.title = title;
         this.content = content;
     }

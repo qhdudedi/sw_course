@@ -1,12 +1,13 @@
 package sku.lesson.blog.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sku.lesson.blog.domain.Article;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class AddArticleRequest {
     private String title;
@@ -16,6 +17,5 @@ public class AddArticleRequest {
                 .title(title)
                 .content(content)
                 .build();
-
     }
 }
