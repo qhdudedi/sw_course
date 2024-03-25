@@ -6,6 +6,8 @@ import sku.lesson.blog.domain.Article;
 import sku.lesson.blog.dto.AddArticleRequest;
 import sku.lesson.blog.repository.BlogRepository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class BlogService {
@@ -13,5 +15,8 @@ public class BlogService {
 
     public Article save(AddArticleRequest request) {
         return blogRepository.save(request.toEntity());
+    }
+    public List<Article> findAll(){
+        return blogRepository.findAll();
     }
 }
