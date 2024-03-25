@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import sku.lesson.blog.domain.Article;
 import sku.lesson.blog.dto.AddArticleRequest;
 import sku.lesson.blog.dto.ArticleResponse;
+import sku.lesson.blog.dto.UpdateArticleRequest;
 import sku.lesson.blog.service.BlogService;
 
 import java.util.List;
@@ -41,10 +42,16 @@ public class BlogApiController {
     }
 
     @DeleteMapping("/api/articles/{id}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable long id)
-    {
+    public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
         blogService.delete(id);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request){
+        Article updatedArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok().body(updatedArticle);
     }
 }
