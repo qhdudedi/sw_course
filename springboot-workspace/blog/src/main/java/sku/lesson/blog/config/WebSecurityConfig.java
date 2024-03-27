@@ -34,15 +34,18 @@ public class WebSecurityConfig {
                 .requestMatchers("/login","/signup","/user").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/articles")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login")
-                .invalidateHttpSession(true)
-                .and()
-                .csrf().disable()
+                .formLogin((formLogin) ->
+                        formLogin
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/articles")
+                )
+                .logout((logoutConfig) ->
+                        logoutConfig
+                                .logoutSuccessUrl("/login")
+                                .invalidateHttpSession(true))
+                .csrf((csrfConfig) ->
+                        csrfConfig.disable()
+                )
                 .build();
     }
     /**인증 관리자 관련 설정*/
