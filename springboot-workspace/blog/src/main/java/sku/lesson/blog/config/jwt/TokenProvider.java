@@ -34,10 +34,10 @@ public class TokenProvider {
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuer(jwtProperties.getIssuer())
                 .setIssuedAt(now)
-                .setExpiration(expiry)
+                .setExpiration(expiry)  //내용 exp : expiry 멤버 변숫값
                 .setSubject(user.getEmail())
                 .claim("id",user.getId())
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey()) //토큰 생성 시 properties파일에 선언해둔 비밀값과 함께 HS256방식으로 암호화
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey()) //토큰 생성 시 properties파일에 선언해둔 비밀값과 함께 해시값을 HS256방식으로 암호화
                 .compact();
     }
     /** token 유효성 검사*/
