@@ -28,26 +28,36 @@ public class WebSecurityConfig {
     }
     /** 특정 Http 요청에 대한 웹 기반 보안 구성*/
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
-        return http.
-                authorizeRequests()
-                .requestMatchers("/login","/signup","/user").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin((formLogin) ->
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/login", "/signup", "/user").permitAll()
+                                .anyRequest().authenticated()
+                )
+                .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/login")
-                                .defaultSuccessUrl("/articles")
+                                .successHandler((request, response, authentication) -> {
+                                    // 로그인 성공 시 로직을 추가
+                                    response.sendRedirect("/articles");
+                                })
+                                .failureHandler((request, response, exception) -> {
+                                    // 로그인 실패 시 로직을 추가
+                                    response.sendRedirect("/login?error");
+                                })
                 )
-                .logout((logoutConfig) ->
-                        logoutConfig
+                .logout(logout ->
+                        logout
                                 .logoutSuccessUrl("/login")
-                                .invalidateHttpSession(true))
-                .csrf((csrfConfig) ->
-                        csrfConfig.disable()
+                                .invalidateHttpSession(true)
+                )
+                .csrf(csrf ->
+                        csrf.disable()
                 )
                 .build();
     }
+
     /**인증 관리자 관련 설정*/
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailService userDetailService) throws Exception {
